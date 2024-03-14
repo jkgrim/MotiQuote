@@ -1,23 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./App.css";
 
 function App() {
+  const [quote, setQuote] = useState("");
+  const [author, setAuthor] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchRandomQuote = () => {
+    setIsLoading(true);
+    fetch("https://api.quotable.io/random")
+      .then((response) => response.json())
+      .then((data) => {
+        setQuote(data.content);
+        setAuthor(data.author);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching quote:", error);
+        setIsLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    fetchRandomQuote();
+  }, []); // Fetch initial quote on component mount
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 className="title">MotiQuote</h1>
+      <div>
+        {isLoading ? (
+          <p className="quote">Loading...</p>
+        ) : (
+          <>
+            <p className="quote">"{quote}"</p>
+            <p className="author">- {author}</p>
+          </>
+        )}
+      </div>
+      <button
+        className="new-quote-btn"
+        onClick={fetchRandomQuote}
+        disabled={isLoading}
+      >
+        {isLoading ? "Fetching..." : "Generate New Quote"}
+      </button>
     </div>
   );
 }
