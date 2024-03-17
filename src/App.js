@@ -23,7 +23,7 @@ function App() {
 
   useEffect(() => {
     fetchRandomQuote();
-  }, []); // Fetch initial quote on component mount
+  }, []);
 
   return (
     <div className="App">
