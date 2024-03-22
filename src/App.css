@@ -26,6 +26,7 @@ body {
   font-size: 2vw;
 }
 
+.copy-quote-btn,
 .new-quote-btn {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -36,8 +37,13 @@ body {
   border: 2px solid #ffc857;
   padding: 10px;
   border-radius: 8px;
+  margin: 8px;
+  transition: 0.2s ease-in-out;
 }
 
+.copy-quote-btn:hover,
 .new-quote-btn:hover {
   cursor: pointer;
+  color: #252934;
+  background-color: #ffc857;
 }
