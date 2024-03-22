@@ -70,7 +70,7 @@ function App() {
         onClick={updateAndCopyToClipboard}
         disabled={isLoading}
       >
-        {copied ? "Quote copied to clipboard" : "Copy to Clipboard"}
+        {copied ? "Copied to Clipboard Successfully!" : "Copy to Clipboard"}
       </button>
     </div>
   );
