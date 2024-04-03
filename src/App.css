@@ -26,6 +26,10 @@ body {
   font-size: 2vw;
 }
 
+.error-msg {
+  color: rgb(253, 85, 85);
+}
+
 .copy-quote-btn,
 .new-quote-btn {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",

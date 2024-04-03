@@ -4,6 +4,7 @@ import "./App.css";
 function App() {
   const [quote, setQuote] = useState("");
   const [author, setAuthor] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
   const [copied, setCopied] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -19,6 +20,9 @@ function App() {
       })
       .catch((error) => {
         console.error("Error fetching quote:", error);
+        setQuote("I've got a bad feeling about this...")
+        setAuthor("Luke Skywalker")
+        setErrorMsg("Error: Try again later")
         setIsLoading(false);
       });
   };
@@ -53,6 +57,7 @@ function App() {
           <>
             <p className="quote">"{quote}"</p>
             <p className="author">- {author}</p>
+            <p className="error-msg">{errorMsg}</p>
           </>
         )}
       </div>
