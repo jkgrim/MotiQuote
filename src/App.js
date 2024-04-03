@@ -20,7 +20,7 @@ function App() {
       })
       .catch((error) => {
         console.error("Error fetching quote:", error);
-        setQuote("I've got a bad feeling about this...")
+        setQuote("I have a bad feeling about this...")
         setAuthor("Luke Skywalker")
         setErrorMsg("Error: Try again later")
         setIsLoading(false);
