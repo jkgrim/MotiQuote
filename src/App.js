@@ -48,7 +48,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="title">MotiQuote</h1>
+      <h1 className="title">"Moti<em>Quote</em>"</h1>
 
       <div>
         {isLoading ? (
