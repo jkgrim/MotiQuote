@@ -1,10 +1,16 @@
 import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import "./App.css";
 
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
+
 function App() {
-  const [quote, setQuote] = useState("");
-  const [author, setAuthor] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
+  const [quotes, setQuotes] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(-1);
   const [copied, setCopied] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -13,22 +19,35 @@ function App() {
     fetch("https://api.quotable.io/random")
       .then((response) => response.json())
       .then((data) => {
-        setQuote(data.content);
-        setAuthor(data.author);
+        setQuotes([...quotes, { quote: data.content, author: data.author }]);
+        setCurrentIndex(quotes.length);
         setIsLoading(false);
         setCopied(false);
       })
       .catch((error) => {
         console.error("Error fetching quote:", error);
-        setQuote("I have a bad feeling about this...")
-        setAuthor("Luke Skywalker")
-        setErrorMsg("Error: Try again later")
+        setQuotes([
+          ...quotes,
+          {
+            quote: "I have a bad feeling about this...",
+            author: "Luke Skywalker",
+          },
+        ]);
+        setCurrentIndex(quotes.length);
         setIsLoading(false);
       });
   };
 
+  const navigate = (step) => {
+    const newIndex = currentIndex + step;
+    if (newIndex >= 0 && newIndex < quotes.length) {
+      setCurrentIndex(newIndex);
+    }
+  };
+
   const updateAndCopyToClipboard = () => {
-    const combinedString = `"${quote}" -${author}`;
+    const { quote, author } = quotes[currentIndex];
+    const combinedString = `"${quote}" - ${author}`;
 
     navigator.clipboard
       .writeText(combinedString)
@@ -44,23 +63,51 @@ function App() {
 
   useEffect(() => {
     fetchRandomQuote();
+    // eslint-disable-next-line
   }, []);
 
   return (
     <div className="App">
-      <h1 className="title">"Moti<em>Quote</em>"</h1>
+      <div className="title-wrapper">
+        <button
+          className="history-btn"
+          onClick={() => navigate(-1)}
+          disabled={isLoading || currentIndex === 0}
+        >
+          <FontAwesomeIcon icon={faChevronLeft} />
+        </button>
+
+        <h1 className="title">
+          "Moti<em>Quote</em>"
+        </h1>
+
+        <button
+          className="history-btn"
+          onClick={() => navigate(1)}
+          disabled={isLoading || currentIndex === quotes.length - 1}
+        >
+          <FontAwesomeIcon icon={faChevronRight} />
+        </button>
+      </div>
 
       <div>
         {isLoading ? (
           <p className="quote">Loading...</p>
         ) : (
           <>
-            <p className="quote">"{quote}"</p>
-            <p className="author">- {author}</p>
-            <p className="error-msg">{errorMsg}</p>
+            <p className="quote">"{quotes[currentIndex]?.quote}"</p>
+            <p className="author">- {quotes[currentIndex]?.author}</p>
           </>
         )}
       </div>
+
+      <button
+        className="copy-quote-btn"
+        onClick={updateAndCopyToClipboard}
+        disabled={isLoading || currentIndex === -1}
+      >
+        {copied ? "Copied to Clipboard Successfully!" : "Copy to Clipboard"}
+      </button>
 
       <button
         className="new-quote-btn"
@@ -68,14 +115,6 @@ function App() {
         disabled={isLoading}
       >
         {isLoading ? "Fetching..." : "Generate New Quote"}
-      </button>
-
-      <button
-        className="copy-quote-btn"
-        onClick={updateAndCopyToClipboard}
-        disabled={isLoading}
-      >
-        {copied ? "Copied to Clipboard Successfully!" : "Copy to Clipboard"}
       </button>
     </div>
   );

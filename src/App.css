@@ -18,6 +18,35 @@ em {
   color: #ffc857;
 }
 
+.title-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.history-btn {
+  background-color: #252934;
+  border: 2px solid #ffc857;
+  color: #ffc857;
+  padding: 10px;
+  font-size: 2vw;
+  border-radius: 8px;
+  transition: 0.2s ease-in-out;
+}
+
+.history-btn:disabled {
+  pointer-events: none;
+  cursor: default;
+  border: #252934;
+  color: #252934;
+}
+
+.history-btn:hover {
+  cursor: pointer;
+  color: #252934;
+  background-color: #ffc857;
+}
+
 .title {
   color: #f5f5f0;
   font-size: 3vw;
