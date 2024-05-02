@@ -101,21 +101,23 @@ function App() {
         )}
       </div>
 
-      <button
-        className="copy-quote-btn"
-        onClick={updateAndCopyToClipboard}
-        disabled={isLoading || currentIndex === -1}
-      >
-        {copied ? "Copied to Clipboard Successfully!" : "Copy to Clipboard"}
-      </button>
+      <div className="btn-wrapper">
+        <button
+          className="copy-quote-btn"
+          onClick={updateAndCopyToClipboard}
+          disabled={isLoading || currentIndex === -1}
+        >
+          {copied ? "Copied to Clipboard Successfully!" : "Copy to Clipboard"}
+        </button>
 
-      <button
-        className="new-quote-btn"
-        onClick={fetchRandomQuote}
-        disabled={isLoading}
-      >
-        {isLoading ? "Fetching..." : "Generate New Quote"}
-      </button>
+        <button
+          className="new-quote-btn"
+          onClick={fetchRandomQuote}
+          disabled={isLoading}
+        >
+          {isLoading ? "Fetching..." : "Generate New Quote"}
+        </button>
+      </div>
     </div>
   );
 }
