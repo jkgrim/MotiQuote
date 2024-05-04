@@ -52,7 +52,6 @@ function App() {
     navigator.clipboard
       .writeText(combinedString)
       .then(() => {
-        console.log("Combined string copied to clipboard successfully!");
         setCopied(true);
         setTimeout(() => setCopied(false), 3000);
       })
@@ -92,7 +91,7 @@ function App() {
 
       <div>
         {isLoading ? (
-          <p className="quote">Loading...</p>
+          <p className="loader"></p>
         ) : (
           <>
             <p className="quote">"{quotes[currentIndex]?.quote}"</p>

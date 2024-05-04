@@ -90,6 +90,24 @@ em {
   background-color: #ffc857;
 }
 
+.loader {
+  border: 16px solid #252934;
+  border-top: 16px solid #ffc857;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 @media (max-width: 900px) {
   .history-btn {
     font-size: 20px;
