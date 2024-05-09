@@ -117,6 +117,11 @@ function App() {
           {isLoading ? "Fetching..." : "Generate New Quote"}
         </button>
       </div>
+
+      <div className="a">
+        Hi DevPipeline. This is how quickly Vercel can update your changes.
+        Pretty cool, huh?
+      </div>
     </div>
   );
 }
