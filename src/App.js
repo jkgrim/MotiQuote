@@ -16,10 +16,7 @@ export default function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route
-            path="/"
-            element={<Outlet />} // Use Outlet here
-          >
+          <Route path="/" element={<Outlet />}>
             <Route index element={<Home />} />
             <Route path="random" element={<RandomQuote />} />
           </Route>
